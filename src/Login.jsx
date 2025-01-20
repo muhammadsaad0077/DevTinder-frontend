@@ -1,15 +1,27 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 
 const Login = () => {
-    const [email, setEmail] = useState("saad@gmail.com");
-    const [password, setPassword] = useState("Saad23423@12345");
+    const [email, setEmail] = useState("hamza@gmail.com");
+    const [password, setPassword] = useState("Hamza@123");
 
     const handleLogin = async()=>{
+      try{
         const response = await axios.post("http://localhost:3001/login", {
             email,
             password
+        },
+        {
+          withCredentials: true
         }
+
       )
+      console.log("Login successful:", response.data);
+    }
+    catch(err){
+      console.log(`Error: ${err.message}`);
+      
+    }
     }
 
 
@@ -18,7 +30,7 @@ const Login = () => {
     <div className="flex justify-center mt-32">
       <div className="w-[450px] bg-base-200 shadow-lg rounded-2xl p-16">
         <h2 className="text-2xl font-bold text-center mb-6 text-gray-300">Login</h2>
-        <form className="space-y-4">
+        <div className="space-y-4">
           {/* Email Field */}
           <div className="relative mt-10">
             <label
@@ -101,7 +113,7 @@ const Login = () => {
             Login
           </button>
           </div>
-        </form>
+        </div>
         <p className="text-md  text-center text-gray-600 mt-6">
           Don't have an account?{" "}
           <a

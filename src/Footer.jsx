@@ -6,7 +6,7 @@ const Footer = () => {
   <aside className="grid-flow-col items-center">
     <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
   </aside>
-  <nav className="grid-flow-col -mx-3 gap-4 md:place-self-center md:justify-self-end">
+  <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
     <a>
       <svg
         xmlns="http://www.w3.org/2000/svg"
