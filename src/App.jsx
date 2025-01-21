@@ -1,29 +1,31 @@
 import { useState } from 'react'
 import './App.css'
-import Navbar from './Navbar'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Login from './Login'
-import Signup from './Signup'
-import Body from './Body'
-import { Provider } from 'react-redux'
+import Navbar from './components/Navbar'
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
+import Login from './components/Login'
+import Signup from './components/Signup'
+import Body from './components/Body'
+import { Provider, useSelector } from 'react-redux'
 import appStore from './utils/appStore'
+import Feed from './components/Feed'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
+   
     <Provider store={appStore}>
      <BrowserRouter basename='/'>
       <Routes>
+        
         <Route path="/" element={<Body />}>
+         <Route path='/' element={<Feed />}/>
          <Route path='/login' element={<Login />} />
          <Route path='/signup' element={<Signup />} />
         </Route>
       </Routes>
      </BrowserRouter>
     </Provider>
-    </>
+   
   )
 }
 
