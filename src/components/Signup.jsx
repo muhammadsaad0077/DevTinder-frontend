@@ -1,11 +1,20 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { base_url } from '../utils/constants'
-import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { addUser } from '../utils/userSlice'
 
 const Signup = () => {
+  const user = useSelector((store) => store.user)
+  const navigate = useNavigate()
+
+  useEffect(()=>{
+    if(user){
+      return navigate('/')
+    }
+  }, [user, navigate])
+
   const dispatch = useDispatch();
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
@@ -22,11 +31,13 @@ const Signup = () => {
     
     try
     {
+    const Skills = skills.split(",").map((skill) => skill.trim());
     const response = await axios.post(`${base_url}/signup`, {
-      firstName, lastName, password, about, photoUrl, skills, gender, phoneNo, email, age
+      firstName, lastName, password, about, photoUrl, skills: Skills, gender, phoneNo, email, age
     })
     console.log(response.data);
     dispatch(addUser(response.data))
+    navigate('/')
     
   }
   catch(err){
@@ -34,7 +45,9 @@ const Signup = () => {
     
   }
   }
+
   return (
+    
     <div className="flex justify-center mt-16">
   <div className="w-[600px] bg-base-200 shadow-lg rounded-2xl p-10">
     <h2 className="text-2xl font-bold text-center mb-6 text-gray-300">Sign Up</h2>
@@ -193,16 +206,19 @@ const Signup = () => {
           type="submit"
           className="py-2 px-8 text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-md focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition"
         >
-        <Link to='/'>
+        
           Sign Up
-          </Link>
+          
         </button>
       </div>
     </div>
   </div>
 </div>
-
+    
+    
   )
+
+
 }
 
 export default Signup

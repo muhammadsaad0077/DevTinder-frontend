@@ -16,6 +16,7 @@ const Navbar = () => {
       withCredentials: true
     })
     dispatch(removeUser());
+    navigate('/login')
   }
   catch(err){
     console.log(`Error: ${err.message}`);
@@ -54,7 +55,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li><a>Settings</a></li>
-        <li onClick={handleLogout}><Link to='/login'>Logout</Link></li>
+        <li onClick={handleLogout}><Link>Logout</Link></li>
       </ul>
     </div>
     </>
