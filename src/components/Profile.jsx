@@ -39,7 +39,7 @@ const Profile = () => {
     {user.gender? <h2>Gender - {user.gender}</h2>: <h2></h2>}
 
   {
-    user.skills?
+    user.skills==null?
     <div className='flex'>
       <h2>Skills:</h2>
     {
