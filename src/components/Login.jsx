@@ -19,6 +19,7 @@ const Login = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
     const dispatch = useDispatch();
 
     const handleLogin = async()=>{
@@ -37,7 +38,8 @@ const Login = () => {
       return navigate("/")
     }
     catch(err){
-      console.log(`Error: ${err.message}`);
+      setError(err?.response?.data || "Something went wrong")
+      
       
     }
     }
@@ -122,6 +124,7 @@ const Login = () => {
           </div>
 
           {/* Submit Button */}
+          <p className='text-red-500 pt-1'>{error}</p>
           <div className='flex justify-center relative top-1'>
           <button
             type="submit"

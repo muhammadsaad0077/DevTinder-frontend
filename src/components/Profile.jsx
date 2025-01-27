@@ -1,27 +1,29 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { base_url } from '../utils/constants'
+import { useSelector } from 'react-redux';
 
 const Profile = () => {
-  const [user, setUser] = useState({});
-  const userProfile = async() => {
-    try
-    {
-      const response = await axios.get(`${base_url}/profile/view`,{
-      withCredentials: true
-    })  
-    
-    setUser(response.data)      
-    
-    }
-    catch(err){
-      console.log(`Error: ${err.message}`);      
-    }    
-  }
+  const user = useSelector(store => store.user)
 
-  useEffect(() => {
-    userProfile();
-  }, [])
+  // const userProfile = async() => {
+  //   try
+  //   {
+  //     const response = await axios.get(`${base_url}/profile/view`,{
+  //     withCredentials: true
+  //   })  
+    
+  //   setUser(response.data)      
+    
+  //   }
+  //   catch(err){
+  //     console.log(`Error: ${err.message}`);      
+  //   }    
+  // }
+
+  // useEffect(() => {
+  //   userProfile();
+  // }, [])
 
   return (
     (user && 
