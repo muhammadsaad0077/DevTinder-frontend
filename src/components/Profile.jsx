@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { base_url } from '../utils/constants'
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
   const user = useSelector(store => store.user)
@@ -34,7 +35,13 @@ const Profile = () => {
       src={user.photo}
       alt="Shoes" />
   </figure>
-  <div className="card-body">
+  <div className='flex justify-center'>
+    <Link to='/profile/edit'><button className='bg-base-200 p-3 rounded-lg text-bold m-6 '>
+      Edit Profile
+    </button>
+    </Link>
+  </div>
+  <div className="card-body -mt-8">
     <h1 className="card-title text-2xl">{user.firstName} {user.lastName}</h1>
     <h2 className='mt-3'>{user.about}</h2>
     <h2>{user.email}</h2>
