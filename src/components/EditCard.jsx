@@ -4,8 +4,7 @@ import { base_url } from '../utils/constants'
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const Profile = () => {
-  const user = useSelector(store => store.user);
+const EditCard = ({user}) => {
   const {firstName, lastName, about, gender, phoneNo, photo, skills} = user;
 
   
@@ -19,20 +18,17 @@ const Profile = () => {
       src={photo}
       alt="user profile pic" />
   </figure>
-  <div className='flex justify-center'>
-    <Link to='/profile/edit'><button className='bg-base-200 p-3 rounded-lg text-bold m-6 '>
-      Edit Profile
-    </button>
-    </Link>
-  </div>
-  <div className="card-body -mt-8">
+  
+  <div className="card-body">
     <h1 className="card-title text-2xl">{firstName} {lastName}</h1>
     <h2 className='mt-3'>{about}</h2>
     <h2>{user.email}</h2>
     {user.gender? <h2>Gender - {gender}</h2>: <h2></h2>}
 
   {
-    user.skills==null?
+    skills==null?
+    <div></div>
+    :
     <div className='flex'>
       <h2>Skills:</h2>
     {
@@ -41,8 +37,6 @@ const Profile = () => {
       })
     }
       </div>
-    :
-    <div></div>
   }
   </div>
 </div>
@@ -50,4 +44,4 @@ const Profile = () => {
 
 }
 
-export default Profile
+export default EditCard

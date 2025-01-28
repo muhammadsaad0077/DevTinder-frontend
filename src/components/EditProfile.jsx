@@ -1,81 +1,115 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import EditCard from './EditCard';
+import axios from 'axios';
+import { base_url } from '../utils/constants';
+import { addUser } from '../utils/userSlice';
 
 const EditProfile = () => {
-    const dispatch = useDispatch();
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
-  const [password, setPassword] = useState("")
-  const [about, setAbout] = useState("")
-  const [photoUrl, setPhotoUrl] = useState("")
-  const [skills, setSkills] = useState([])
-  const [gender, setGender] = useState("")
-  const [phoneNo, setPhoneNo] = useState("")
-  const [email, setEmail] = useState("")
-  const [age, setAge] = useState("")
+  const user = useSelector(store => store?.user);  
+  const dispatch = useDispatch();
+  
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [about, setAbout] = useState('');
+  const [photo, setPhoto] = useState('');
+  const [skills, setSkills] = useState([]);
+  const [gender, setGender] = useState('');
+  const [phoneNo, setPhoneNo] = useState('');
+  const [age, setAge] = useState('');
+  const [error, setError] = useState('');
+  const [notification, setNotification] = useState(false);
+
+  // Update state when user changes
+  useEffect(() => {
+    if (user) {
+      setFirstName(user.firstName || '');
+      setLastName(user.lastName || '');
+      setAbout(user.about || '');
+      setPhoto(user.photo || '');
+      setSkills(user.skills || []);
+      setGender(user.gender || '');
+      setPhoneNo(user.phoneNo || '');
+      setAge(user.age || '');
+    }
+  }, [user]);
+
+  const handleUpdate = async() =>{
+   try{
+    const res = await axios.patch(`${base_url}/profile/edit`, {
+      firstName, lastName, about, gender, phoneNo, photo, skills
+    }, {withCredentials: true})
+
+    dispatch(addUser(res.data))
+    setNotification(true)
+
+    setTimeout(()=>{
+      setNotification(false)
+    }, 3000)
+    
+
+   }
+
+   catch(err){
+    console.log(`${err}`);
+    
+   }
+
+
+  }
+
+  const handleSkills = (e) =>{
+    const value = e.target.value;
+    setSkills(value.split(',').map((skill) => skill.trim()))
+  }
 
   return (
+  <>
+   {( user && 
+    
     <div className="flex justify-center mt-16">
+
+    {/* Notification UI */}
+  {
+  (notification && <div className="toast toast-top toast-center">
+   <div className="alert alert-info">
+    <span>Profile Updated Sucessfully</span>
+   </div>
+  </div>
+  )
+}
   <div className="w-[600px] bg-base-200 shadow-lg rounded-2xl p-10">
-    <h2 className="text-2xl font-bold text-center mb-6 text-gray-300">Sign Up</h2>
+    <h2 className="text-2xl font-bold text-center mb-6 text-gray-300">Edit Profile</h2>
     <div className="space-y-4">
       {/* First Name Field */}
       <div>
         <label htmlFor="firstName" className="block font-medium text-gray-300">
-          First Name<span className="text-red-500">*</span>
+          First Name
         </label>
         <input
           type="text"
+          value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
           id="firstName"
           placeholder="Enter your first name"
           className="block mt-2 w-full bg-base-200 p-3 text-sm border border-gray-500 focus:border-gray-400 rounded-lg shadow-sm"
-          required
+          
         />
       </div>
 
       {/* Last Name Field */}
       <div>
         <label htmlFor="lastName" className="block font-medium text-gray-300">
-          Last Name<span className="text-red-500">*</span>
+          Last Name
         </label>
         <input
           type="text"
           id="lastName"
+          value={lastName}
           onChange={(e) => setLastName(e.target.value)}
           placeholder="Enter your last name"
           className="block mt-2 w-full bg-base-200 p-3 text-sm border border-gray-500 focus:border-gray-400 rounded-lg shadow-sm"
-          required
-        />
-      </div>
-
-      {/* Email Field */}
-      <div>
-        <label htmlFor="email" className="block font-medium text-gray-300">
-          Email<span className="text-red-500">*</span>
-        </label>
-        <input
-          type="email"
-          id="email"
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your email"
-          className="block mt-2 w-full bg-base-200 p-3 text-sm border border-gray-500 focus:border-gray-400 rounded-lg shadow-sm"
-          required
-        />
-      </div>
-
-      {/* Password Field */}
-      <div>
-        <label htmlFor="password" className="block font-medium text-gray-300">
-          Password<span className="text-red-500">*</span>
-        </label>
-        <input
-          type="password"
-          id="password"
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter your password"
-          className="block mt-2 w-full bg-base-200 p-3 text-sm border border-gray-500 focus:border-gray-400 rounded-lg shadow-sm"
-          required
+          
         />
       </div>
 
@@ -86,13 +120,14 @@ const EditProfile = () => {
         </label>
         <select
           id="gender"
+          value={gender}
           onChange={(e) => setGender(e.target.value)}
           className="block mt-2 w-full bg-base-200 p-3 text-sm border border-gray-500 focus:border-gray-400 rounded-lg shadow-sm"
         >
           <option value="">Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
+          <option value="male">male</option>
+          <option value="female">female</option>
+          <option value="other">others</option>
         </select>
       </div>
 
@@ -102,9 +137,10 @@ const EditProfile = () => {
           Skills
         </label>
         <input
+          value={skills}
           type="text"
           id="skills"
-          onChange={(e) => setSkills(e.target.value)}
+          onChange={ (e) => handleSkills(e)}
           placeholder="Enter your skills (comma separated)"
           className="block mt-2 w-full bg-base-200 p-3 text-sm border border-gray-500 focus:border-gray-400 rounded-lg shadow-sm"
         />
@@ -116,9 +152,10 @@ const EditProfile = () => {
           Photo URL
         </label>
         <input
+          value={photo}
           type="url"
           id="photoUrl"
-          onChange={(e) => setPhotoUrl(e.target.value)}
+          onChange={(e) => setPhoto(e.target.value)}
           placeholder="Enter photo URL"
           className="block mt-2 w-full bg-base-200 p-3 text-sm border border-gray-500 focus:border-gray-400 rounded-lg shadow-sm"
         />
@@ -130,6 +167,7 @@ const EditProfile = () => {
           Age
         </label>
         <input
+          value={age}
           type="number"
           id="age"
           onChange={(e) => setAge(e.target.value)}
@@ -146,6 +184,7 @@ const EditProfile = () => {
         <input
           type="tel"
           id="phoneNo"
+          value={phoneNo}
           onChange={(e) => setPhoneNo(e.target.value)}
           placeholder="Enter your phone number"
           className="block mt-2 w-full bg-base-200 p-3 text-sm border border-gray-500 focus:border-gray-400 rounded-lg shadow-sm"
@@ -159,6 +198,7 @@ const EditProfile = () => {
         </label>
         <textarea
           id="about"
+          value={about}
           onChange={(e) => setAbout(e.target.value)}
           placeholder="Tell us about yourself"
           className="block mt-2 w-full bg-base-200 p-3 text-sm border border-gray-500 focus:border-gray-400 rounded-lg shadow-sm"
@@ -166,21 +206,27 @@ const EditProfile = () => {
         ></textarea>
       </div>
 
-      {/* Submit Button */}
+      <p className='text-red-500 pt-1'>{error}</p>
       <div className="flex justify-center mt-6">
         <button
-          onClick={handleSignup}
+          onClick={handleUpdate}
           type="submit"
           className="py-2 px-8 text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-md focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition"
         >
         
-          Sign Up
+          Save Profile
           
         </button>
       </div>
     </div>
   </div>
+
+  <div>
+    <EditCard user={{firstName, lastName, about, gender, age, phoneNo, photo, skills}}/>
+  </div>
 </div>
+   )}
+   </>
   )
 }
 
