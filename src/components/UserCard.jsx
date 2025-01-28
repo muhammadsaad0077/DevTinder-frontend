@@ -1,7 +1,8 @@
 import React from 'react'
 
-const UserCard = ({user}) => {
+const UserCard = ({user, isConnection}) => {
     const {firstName, lastName, photo, skills, age, gender} = user;
+        
   return (
     
     <>
@@ -25,11 +26,16 @@ const UserCard = ({user}) => {
     }
       </div>
     
-
+    {
+    (  !isConnection?  (
     <div className="card-actions justify-center gap-6">
-      <button className="btn btn-primary hover:bg-green-500">Accept</button>
-      <button className="btn btn-primary hover:bg-red-600">Reject</button>
+      <button className="btn btn-primary hover:bg-green-500">Interested</button>
+      <button className="btn btn-primary hover:bg-red-600">Ignored</button>
     </div>
+    ):
+     <div></div>
+  )
+   }
   </div>
 </div>
       

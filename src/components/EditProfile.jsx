@@ -221,7 +221,7 @@ const EditProfile = () => {
     </div>
   </div>
 
-  <div>
+  <div className='mx-20'>
     <EditCard user={{firstName, lastName, about, gender, age, phoneNo, photo, skills}}/>
   </div>
 </div>

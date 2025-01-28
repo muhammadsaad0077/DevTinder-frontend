@@ -42,11 +42,9 @@ const Body = () => {
  
   return (
     <>
-
-     <Navbar />
-     <Outlet />
-     <Footer />
-
+   
+      <Outlet />
+   
     </>
 
   )

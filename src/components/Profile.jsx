@@ -6,9 +6,7 @@ import { Link } from 'react-router-dom';
 
 const Profile = () => {
   const user = useSelector(store => store.user);
-  const {firstName, lastName, about, gender, phoneNo, photo, skills} = user;
-
-  
+  const {firstName, lastName, about, gender, phoneNo, photo, skills} = user; 
 
   return (
      

@@ -10,6 +10,8 @@ import appStore from './utils/appStore'
 import Feed from './components/Feed'
 import Profile from './components/Profile'
 import EditProfile from './components/EditProfile'
+import Footer from './components/Footer'
+import Connection from './components/Connection'
 
 function App() {
 
@@ -17,7 +19,13 @@ function App() {
    
     <Provider store={appStore}>
      <BrowserRouter basename='/'>
-      <Routes>
+
+      <div className="flex flex-col min-h-screen">         
+          <Navbar />
+     
+
+       <main className='flex-grow'>
+       <Routes>
         
         <Route path="/" element={<Body />}>
          <Route path='/' element={<Feed />}/>
@@ -25,8 +33,14 @@ function App() {
          <Route path='/signup' element={<Signup />} />
          <Route path='/profile' element={<Profile />} />
          <Route path='/profile/edit' element={<EditProfile />}/>
+         <Route path='/connections' element={<Connection />}/>
         </Route>
-      </Routes>
+       </Routes>
+       </main>
+       <Footer />
+      </div>
+
+     
      </BrowserRouter>
     </Provider>
    
