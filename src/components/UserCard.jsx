@@ -1,7 +1,7 @@
 import React from 'react'
 
-const UserCard = ({user, isConnection}) => {
-    const {firstName, lastName, photo, skills, age, gender} = user;
+const UserCard = ({user, isConnection, isRequest, handleRequestReview}) => {
+    const {firstName, _id, lastName, photo, skills, age, gender} = user;
         
   return (
     
@@ -29,8 +29,8 @@ const UserCard = ({user, isConnection}) => {
     {
     (  !isConnection?  (
     <div className="card-actions justify-center gap-6">
-      <button className="btn btn-primary hover:bg-green-500">Interested</button>
-      <button className="btn btn-primary hover:bg-red-600">Ignored</button>
+      <button onClick={isRequest ? ()=> handleRequestReview("accepted", _id): null} className="btn btn-primary hover:bg-green-500">{isRequest? "Accept": "Interested"}</button>
+      <button onClick={isRequest ? ()=> handleRequestReview("rejected", _id): null} className="btn btn-primary hover:bg-red-600">{isRequest? "Reject": "Ignore"}</button>
     </div>
     ):
      <div></div>
