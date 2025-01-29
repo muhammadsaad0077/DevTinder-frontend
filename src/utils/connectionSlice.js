@@ -8,11 +8,18 @@ const connectionSlice = createSlice({
         addConnections: (state, action) =>{
             return action.payload;
         },
+        addOneConnection: (state, action) =>{
+            const newUser = action.payload;
+            const isExistUser = state.some((user) => user._id.toString() === newUser._id.toString());
+            if(!isExistUser){
+                state.push(newUser)
+            }
+        },
         removeConnections: (state, action) =>{
             return null;
         }
     }
 })
 
-export const {addConnections, removeConnections} = connectionSlice.actions;
+export const {addConnections, removeConnections, addOneConnection} = connectionSlice.actions;
 export default connectionSlice.reducer;

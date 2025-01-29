@@ -7,12 +7,12 @@ import UserCard from './UserCard'
 
 const Connection = () => {
     const dispatch = useDispatch()
-    const user = useSelector(store => store.connection);
+    const user = useSelector(store => store.connection) || [];
     const isConnection = true;
 
     const handleConnections = async()=>{
-        if(user){
-            return null;
+        if(user?.length > 0){
+            return;
         }
      try{
         const response = await axios.get(`${base_url}/user/connections`, {
@@ -35,6 +35,8 @@ const Connection = () => {
   return (
     <div className='flex'>
         {
+          user?.length === 0 ?
+          <h1 className='text-center text-3xl mt-10 font-bold'>No connections found!</h1>:
           user?.map((user, index)=>{
             return <UserCard key={index} user={user} isConnection={isConnection}/>
           })
