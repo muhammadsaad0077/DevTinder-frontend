@@ -31,6 +31,7 @@ const Profile = () => {
 
   {
     user.skills==null?
+    <div></div>:
     <div className='flex'>
       <h2>Skills:</h2>
     {
@@ -39,8 +40,8 @@ const Profile = () => {
       })
     }
       </div>
-    :
-    <div></div>
+    
+    
   }
   </div>
 </div>

@@ -10,7 +10,7 @@ const connectionSlice = createSlice({
         },
         addOneConnection: (state, action) =>{
             const newUser = action.payload;
-            const isExistUser = state.some((user) => user._id.toString() === newUser._id.toString());
+            const isExistUser = state?.some((user) => user._id.toString() === newUser._id.toString());
             if(!isExistUser){
                 state.push(newUser)
             }

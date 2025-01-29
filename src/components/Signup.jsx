@@ -34,6 +34,8 @@ const Signup = () => {
     const Skills = skills.split(",").map((skill) => skill.trim());
     const response = await axios.post(`${base_url}/signup`, {
       firstName, lastName, password, about, photoUrl, skills: Skills, gender, phoneNo, email, age
+    }, {
+      withCredentials: true
     })
     console.log(response.data);
     dispatch(addUser(response.data))
