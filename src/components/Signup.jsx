@@ -125,9 +125,9 @@ const Signup = () => {
           className="block mt-2 w-full bg-base-200 p-3 text-sm border border-gray-500 focus:border-gray-400 rounded-lg shadow-sm"
         >
           <option value="">Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
+          <option value="male">male</option>
+          <option value="female">female</option>
+          <option value="other">others</option>
         </select>
       </div>
 
@@ -213,6 +213,15 @@ const Signup = () => {
           
         </button>
       </div>
+      <p className="text-md  text-center text-gray-600 mt-6">
+          Already have an account?{" "}
+          <Link
+            to='/login'
+            className="text-indigo-600 hover:underline"
+          >
+            Login
+          </Link>
+        </p>
     </div>
   </div>
 </div>
