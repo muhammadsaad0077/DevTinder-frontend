@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import EditCard from './EditCard';
 import axios from 'axios';
@@ -17,7 +17,7 @@ const EditProfile = () => {
   const [gender, setGender] = useState('');
   const [phoneNo, setPhoneNo] = useState('');
   const [age, setAge] = useState('');
-  const [error, setError] = useState('');
+  const [error] = useState('');
   const [notification, setNotification] = useState(false);
 
   // Update state when user changes

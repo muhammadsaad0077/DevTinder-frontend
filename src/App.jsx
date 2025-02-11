@@ -1,11 +1,10 @@
-import { useState } from 'react'
 import './App.css'
 import Navbar from './components/Navbar'
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Body from './components/Body'
-import { Provider, useSelector } from 'react-redux'
+import { Provider } from 'react-redux'
 import appStore from './utils/appStore'
 import Feed from './components/Feed'
 import Profile from './components/Profile'
@@ -23,8 +22,6 @@ function App() {
 
       <div className="flex flex-col min-h-screen">         
           <Navbar />
-     
-
        <main className='flex-grow'>
        <Routes>
         
@@ -40,12 +37,9 @@ function App() {
        </Routes>
        </main>
        <Footer />
-      </div>
-
-     
+      </div>    
      </BrowserRouter>
-    </Provider>
-   
+    </Provider>  
   )
 }
 

@@ -1,4 +1,3 @@
-import React from 'react'
 
 const UserCard = ({user, id, isConnection, isRequest, handleRequestReview, handleRequest, feed}) => {
     const {firstName, _id, lastName, photo, skills, age, gender} = user;

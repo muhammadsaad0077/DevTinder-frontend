@@ -1,10 +1,10 @@
 import axios from 'axios'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { base_url } from '../utils/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { addRequest, removeRequest } from '../utils/requestSlice'
 import UserCard from './UserCard'
-import { addConnections, addOneConnection } from '../utils/connectionSlice'
+import { addOneConnection } from '../utils/connectionSlice'
 
 const ConnectionRequest = () => {
     const dispatch = useDispatch();

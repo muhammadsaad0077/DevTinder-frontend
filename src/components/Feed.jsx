@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
-import Cookies from "js-cookie";
 import { base_url } from '../utils/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { addFeed, removeFeed } from '../utils/feedSlice';

@@ -1,8 +1,4 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { base_url } from '../utils/constants'
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+
 
 const EditCard = ({user}) => {
   const {firstName, lastName, about, gender, phoneNo, photo, skills} = user;

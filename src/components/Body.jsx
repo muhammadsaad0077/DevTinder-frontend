@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react'
-import Navbar from './Navbar'
+import { useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
-import Footer from './Footer'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { addUser } from '../utils/userSlice'
@@ -11,8 +9,7 @@ const Body = () => {
   const dispatch = useDispatch();
   const userData = useSelector(store => store.user)
   const navigate = useNavigate();
-  
-  
+
   const fetchUser = async() => {
     
     try{
