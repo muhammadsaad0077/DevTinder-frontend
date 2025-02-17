@@ -12,6 +12,7 @@ import EditProfile from './components/EditProfile'
 import Footer from './components/Footer'
 import Connection from './components/Connection'
 import ConnectionRequest from './components/ConnectionRequest'
+import Premium from './components/Premium'
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
          <Route path='/profile/edit' element={<EditProfile />}/>
          <Route path='/connections' element={<Connection />}/>
          <Route path='/requests' element={<ConnectionRequest />}/>
+         <Route path='/premium' element={<Premium />}/>
         </Route>
        </Routes>
        </main>
