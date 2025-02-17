@@ -13,6 +13,8 @@ import Footer from './components/Footer'
 import Connection from './components/Connection'
 import ConnectionRequest from './components/ConnectionRequest'
 import Premium from './components/Premium'
+import PaymentSucess from './components/PaymentSucess'
+import PaymentError from './components/PaymentError'
 
 function App() {
 
@@ -35,6 +37,8 @@ function App() {
          <Route path='/connections' element={<Connection />}/>
          <Route path='/requests' element={<ConnectionRequest />}/>
          <Route path='/premium' element={<Premium />}/>
+         <Route path='/success' element={<PaymentSucess />}/>
+         <Route path='/cancel' element={<PaymentError />}/>
         </Route>
        </Routes>
        </main>
