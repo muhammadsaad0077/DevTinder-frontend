@@ -36,9 +36,9 @@ function App() {
          <Route path='/profile/edit' element={<EditProfile />}/>
          <Route path='/connections' element={<Connection />}/>
          <Route path='/requests' element={<ConnectionRequest />}/>
-         <Route path='/premium' element={<Premium />}/>
+         {/* <Route path='/premium' element={<Premium />}/>
          <Route path='/success' element={<PaymentSucess />}/>
-         <Route path='/cancel' element={<PaymentError />}/>
+         <Route path='/cancel' element={<PaymentError />}/> */}
         </Route>
        </Routes>
        </main>
