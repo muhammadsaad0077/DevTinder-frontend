@@ -12,9 +12,7 @@ import EditProfile from './components/EditProfile'
 import Footer from './components/Footer'
 import Connection from './components/Connection'
 import ConnectionRequest from './components/ConnectionRequest'
-import Premium from './components/Premium'
-import PaymentSucess from './components/PaymentSucess'
-import PaymentError from './components/PaymentError'
+import Chat from './components/Chat'
 
 function App() {
 
@@ -36,6 +34,7 @@ function App() {
          <Route path='/profile/edit' element={<EditProfile />}/>
          <Route path='/connections' element={<Connection />}/>
          <Route path='/requests' element={<ConnectionRequest />}/>
+         <Route path='/chat/:targetUserId' element={<Chat />}/>
          {/* <Route path='/premium' element={<Premium />}/>
          <Route path='/success' element={<PaymentSucess />}/>
          <Route path='/cancel' element={<PaymentError />}/> */}

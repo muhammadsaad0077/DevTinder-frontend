@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const UserCard = ({user, id, isConnection, isRequest, handleRequestReview, handleRequest, feed}) => {
     const {firstName, _id, lastName, photo, skills, age, gender} = user;
@@ -37,7 +38,13 @@ const UserCard = ({user, id, isConnection, isRequest, handleRequestReview, handl
       className="btn btn-primary hover:bg-red-600">{isRequest? "Reject": "Ignore"}</button>
     </div>
     ):
-     <div></div>
+     <div>
+      <Link to={`/chat/${_id}`}>
+      <button
+      className="btn btn-primary py-1 px-6 hover:bg-green-500">Chat</button>
+      </Link>
+     </div>
+     
   )
    }
   </div>

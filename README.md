@@ -31,3 +31,5 @@ Deploying our web
   - to connect frontend to backend we should map localhost:3001 to devtinder/api
   - search chatgpt nginx proxy pass of /api to port 3001
   - restart nginx - sudo systemctl restart nginx
+
+# Chat Feature using socket.io
