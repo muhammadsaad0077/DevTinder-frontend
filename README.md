@@ -33,3 +33,5 @@ Deploying our web
   - restart nginx - sudo systemctl restart nginx
 
 # Chat Feature using socket.io
+ - Build Chat UI
+ - Setup socket.io in backend

@@ -1,8 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { createSocketConnection } from "../utils/socket";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 const Chat = () => {
+    const { targetUserId } = useParams();
+    const user = useSelector(store => store.user);
+    const userId = user._id;
+
+
     const [messages, setMessages] = useState([
         { text: "Hello! How can I help you today?", sender: "bot" },
       ]);
@@ -18,6 +26,11 @@ const Chat = () => {
           setMessages((prev) => [...prev, { text: "Got it!", sender: "bot" }]);
         }, 1000);
       };
+
+      useEffect(()=>{
+        const socket = createSocketConnection();
+        socket.emit("joinChat", {userId, targetUserId})
+      }, [])
     
       return (
         <div className="flex flex-col w-full max-w-md mx-auto h-[600px] mt-10 mb-10 p-4 bg-base-200">
