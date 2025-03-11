@@ -7,14 +7,16 @@ import { useSelector } from "react-redux";
 
 const Chat = () => {
     const { targetUserId } = useParams();
-    const user = useSelector(store => store.user);
-    const userId = user._id;
-
+    const user = useSelector(store => store?.user);
+    const userId = user?._id;
+    const firstName = user?.firstName;
 
     const [messages, setMessages] = useState([
         { text: "Hello! How can I help you today?", sender: "bot" },
       ]);
       const [input, setInput] = useState("");
+
+      
     
       const sendMessage = () => {
         if (!input.trim()) return;
@@ -27,10 +29,18 @@ const Chat = () => {
         }, 1000);
       };
 
+
       useEffect(()=>{
         const socket = createSocketConnection();
-        socket.emit("joinChat", {userId, targetUserId})
-      }, [])
+        // As soon as page loads, socket connection is made and joinChat event is emitted
+        socket.emit("joinChat", {firstName, userId, targetUserId});
+
+        return ()=>{
+          socket.disconnect(); // THis will run when the components unmounts
+        }
+      }, [userId, targetUserId, firstName])
+
+      
     
       return (
         <div className="flex flex-col w-full max-w-md mx-auto h-[600px] mt-10 mb-10 p-4 bg-base-200">
